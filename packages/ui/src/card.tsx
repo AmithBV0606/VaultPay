@@ -6,7 +6,7 @@ export function Card({
   children?: React.ReactNode;
 }): JSX.Element {
   return (
-    <div className="border-2 border-gray-400 rounded-lg p-8">
+    <div className="rounded-xl p-8 bg-sky-200">
       <h1 className="text-xl border-b border-gray-400 pb-2">{title}</h1>
 
       <p>{children}</p>
