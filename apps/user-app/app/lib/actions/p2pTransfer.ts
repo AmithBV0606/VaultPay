@@ -30,6 +30,9 @@ export async function p2pTransfer(to: string, amount: number) {
   //   NOTE : Transaction for the same person should happen sequentially and transaction for the different person can happen paralelly.
 
   await prisma.$transaction(async (tx) => {
+    // Lock :
+    await tx.$queryRaw`SELECT * FROM "Balance" WHERE "userId" = ${Number(from)} FOR UPDATE`;
+
     const fromBalance = await tx.balance.findUnique({
       where: { userId: Number(from) },
     });
