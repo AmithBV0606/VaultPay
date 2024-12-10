@@ -36,10 +36,7 @@ jobs:
         username: ${{ secrets.SSH_USERNAME }}
         key: ${{ secrets.SSH_KEY }}
         script: |
-          set -e  # Stop execution if any command fails
           sudo docker pull amithrao/vaultpay_user:latest
-          if sudo docker ps -q -f name=vaultpay-container; then
-            sudo docker stop vaultpay-container
-            sudo docker rm vaultpay-container
-          fi
-          sudo docker run -d --name vaultpay-container -p 3005:3000 amithrao/vaultpay_user:latest
+          sudo docker stop webwallet-app || true
+          sudo docker rm webwallet-app || true
+          sudo docker run -d --restart always --name webwallet-app -p 3005:3000 amithrao/vaultpay_user:latest
