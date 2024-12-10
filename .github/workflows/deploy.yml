@@ -37,6 +37,6 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         script: |
           sudo docker pull amithrao/vaultpay_user:latest
-          sudo docker stop vaultpay_user || true
-          sudo docker rm vaultpay_user || true
-          sudo docker run -d --name vaultpay_user -p 3005:3000 amithrao/vaultpay_user:latest
+          sudo docker stop vaultpay-container || true
+          sudo docker rm vaultpay-container || true
+          sudo docker run -d --name vaultpay-container -p 3005:3000 amithrao/vaultpay_user:latest
